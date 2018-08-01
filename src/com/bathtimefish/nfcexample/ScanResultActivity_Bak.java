@@ -34,28 +34,28 @@ public class ScanResultActivity_Bak extends Activity {
         if (mBundle != null) {
             byte[] nfcIDm = mBundle.getByteArray(NfcAdapter.EXTRA_ID);
 
-            // IDmを8桁と固定する(そうでないカードがきたらエラーを返す)
+            // Fix IDm as 8 digits (If an unknown card arrives return an error)
             if (nfcIDm.length == 8) {
-                // 最下位1桁をそれ以外に足し算して（多少だけど）不可逆性を与える。
-                // ＊＊＊アルゴリズムがザルなのでIDm漏れる危険性アリ＊＊＊
+// Add the least significant digit to the rest (give some) but give irreversibility.
+// *** Algorithm is a monkey so IDm leaks danger Ali ***
 
                 int[] param = new int[8];
 
                 for (int i = 0; i < nfcIDm.length; i++) {
-                    param[i] = nfcIDm[i] & 0xff; // byte 2 int 変換
+                    param[i] = nfcIDm[i] & 0xff; // byte 2 int conversion
                 }
 
                 mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
                 mEditor = mPreferences.edit();
-                /* ここで一桁足している */
+                /* Adding one digit */
                 for (int i = 0; i < param.length - 1; i++) {
                     param[i] += param[7];
                     mEditor.putInt("PARAM" + i, param[i]);
                 }
-                param[7] = 0;// 意味あるのかどうか分からない。
+                param[7] = 0;// I do not know if it is meaningful.
                 mEditor.commit();
 
-                textView1.setText("データセット完了！");
+                textView1.setText("Data set complete!");
                 textView2.append(String.valueOf(param[0]));
                 textView3.append(String.valueOf(param[1]));
                 textView4.append(String.valueOf(param[2]));
@@ -65,7 +65,7 @@ public class ScanResultActivity_Bak extends Activity {
                 textView8.append(String.valueOf(param[6]));
 
             } else {
-                Toast.makeText(this, "申し訳ありませんが別のカードをスキャンしてください", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Sorry Please scan another card", Toast.LENGTH_LONG).show();
                 finish();
             }
 

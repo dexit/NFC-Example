@@ -15,12 +15,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        //Button button1 = (Button) findViewById(R.id.button1);
+        Button button1 = (Button) findViewById(R.id.button1);
         //Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
         Button button4 = (Button) findViewById(R.id.button4);
 
-        /*
+       
         button1.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 
             }
         });
-
+ /*
         button2.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {

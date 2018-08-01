@@ -12,7 +12,7 @@ import android.os.Bundle;
 
 public class ScanActivity extends Activity {
 
-    private NfcAdapter mAdapter; // 端末のNFCアダプタを提供
+    private NfcAdapter mAdapter; //Provide terminal NFC adapter
     private Intent mIntent;
     private PendingIntent mPendingIntent;
     private IntentFilter[] mFilters;
@@ -37,19 +37,19 @@ public class ScanActivity extends Activity {
             throw new RuntimeException("fail", e);
         }
 
-        // どのBroadcastを受け取るか(上で詳細を決めている)
+        // Which Broadcast will be received (Detailed on above)
         mFilters = new IntentFilter[] {
                 ndef,
         };
 
-        // どのタイプのカードを読むようにするか
+        // Which type of card to read
         mTechLists = new String[][] {
                 new String[] {
-                        // ここ書き方間違えているかもしれない。
+                        // I might be misreading it here.
                         NfcA.class.getName(), // MIFARE
                         // NfcB.class.getName(), // B
                         // NfcF.class.getName(), // FeliCa
-                        // FeliCa  だとPitapaが読めるらしい
+                        // FeliCa seems to be able to read Pitapa
                 }
         };
 
@@ -57,7 +57,7 @@ public class ScanActivity extends Activity {
 
     @Override
     protected void onResume() {
-        // NFC読むスイッチみたいなのをONにする
+        // Turn on things like NFC read switch
         super.onResume();
         // Log.v(TAG, "onResume!");
 
@@ -68,7 +68,7 @@ public class ScanActivity extends Activity {
 
     @Override
     protected void onPause() {
-        // NFC読むスイッチみたいなのをOFFにする
+        //Turn OFF the NFC read switch
         super.onPause();
         // Log.v(TAG, "onPause!");
 

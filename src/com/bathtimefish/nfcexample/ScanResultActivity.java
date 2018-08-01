@@ -26,7 +26,7 @@ public class ScanResultActivity extends Activity {
 
         mBundle = getIntent().getExtras();
         
-        // 音声を再生
+        // Play audio
         mMediaPlayer = MediaPlayer.create(this, R.raw.success_scan);
         mMediaPlayer.start();
 
@@ -34,59 +34,59 @@ public class ScanResultActivity extends Activity {
             byte[] nfcIDBytes = mBundle.getByteArray(NfcAdapter.EXTRA_ID);
             String nfcID = "undefined";
 
-            // IDmを8桁と固定する(そうでないカードがきたらエラーを返す)
+            // Fix IDm as 8 digits (If an unknown card arrives return an error)
             //if (nfcIDBytes.length == 8) {
             	//byte [] -> HexString
-            	// バイト配列の２倍の長さの文字列バッファを生成。
+            	// Generate a string buffer twice as long as the byte array.
             	StringBuffer strbuf = new StringBuffer(nfcIDBytes.length * 2);
-            	// バイト配列の要素数分、処理を繰り返す。
+            	// Repeat the process for the number of elements of the byte array.
             	for (int index = 0; index < nfcIDBytes.length; index++) {
-            		// バイト値を自然数に変換。
+            		// Convert byte value to natural number.
             		int bt = nfcIDBytes[index] & 0xff;
-            		// バイト値が0x10以下か判定。
+            		// It is judged whether the byte value is 0x10 or less.
             		if (bt < 0x10) {
-            			// 0x10以下の場合、文字列バッファに0を追加。
+            			// When 0x10 or less, 0 is added to the character string buffer.
             			strbuf.append("0");
             		}
-            		// バイト値を16進数の文字列に変換して、文字列バッファに追加。
+            		// Convert byte value to hexadecimal character string and add it to the string buffer.
             		strbuf.append(Integer.toHexString(bt));
             	}
             	nfcID = strbuf.toString();
             	mNFCID = nfcID;
 
             //} else {
-            //    Toast.makeText(this, "申し訳ありませんが別のカードをスキャンしてください", Toast.LENGTH_LONG).show();
+            //    Toast.makeText(this, "Scan another card", Toast.LENGTH_LONG).show();
             //    finish();
             //}
 
         }
         
-        /* WebViewの表示 */
+        /* Display of WebView */
         setContentView(R.layout.webview);
         
-        // webViewの取得
+        // Obtain webView
         webView = (WebView)findViewById(R.id.webView1);
         
-        // ウェブリソースの既定ディレクトリを設定する
+        // Set the default directory of web resources
         webView.loadDataWithBaseURL("file:///android_asset/www/", null, null, "utf-8", null);
         //webView.loadDataWithBaseURL("file:///android_asset/www/js", null, "application/javascript", "utf-8", null);
         //webView.loadDataWithBaseURL("file:///android_asset/www/css", null, "text/css", "utf-8", null);
         //webView.loadDataWithBaseURL("file:///android_asset/www/image", null, "image/png", null, null);
-        // 右10pxの余白を消す
+        // Erase the margin on the right 10 px
         webView.setVerticalScrollbarOverlay(true);
-        // リンククリックで標準ブラウザが起動するのを防ぐ
+        // Prevent start of standard browser by link click
         webView.setWebViewClient(new WebViewClient());
-        // JavaScriptを使用可能にする
+        // Enable JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
-        // Flashなどのプラグインを有効にする
+        // Enable Flash
         webView.getSettings().setPluginsEnabled( true );
         
-        // JavaScriptインタフェースの追加。
-        // JavaScriptからandroidというオブジェクトを扱えるようになります
+        // Added JavaScript interface.
+        // It will be able to handle the object called android from JavaScript
         //webView.addJavascriptInterface(new WebViewInterface(this), "Android");
         webView.addJavascriptInterface(new JavaScriptInterface(this), "Android");
         
-        // トップページの表示
+        // Display ResultPage
         webView.loadUrl("file:///android_asset/www/scanResult.html");
         //webView.loadUrl("http://html5test.com");
         
@@ -112,7 +112,7 @@ public class ScanResultActivity extends Activity {
     		return mNFCID;
     	}
     	
-    	// indexページ Activity を呼び出す
+    	// Call page index Activity
     	public void goIndex() {
             Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
     		// Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=Tokyo"));
@@ -120,7 +120,7 @@ public class ScanResultActivity extends Activity {
     	}
     }
     
-    // 端末の戻るボタンを押した時に前のページに戻す
+    // Return to the previous page when you press the back button on the device
     /*
     @Override
     public boolean onKeyDown( int keyCode, KeyEvent event ) {

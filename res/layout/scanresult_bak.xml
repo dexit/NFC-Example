@@ -16,42 +16,42 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ちからのつよさ：" />
+        android:text="Chikara's Tsutsumi:" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="かしこさ：" />
+        android:text="Intelligence:" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="すばやさ：" />
+        android:text="Quickness:" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="まりょく：" />
+        android:text="Mariko:" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ぼうぎょりょく：" />
+        android:text="Borrowing:" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="きようさ：" />
+        android:text="Ideas:" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="うんのよさ：" />
+        android:text="Yeah goodness:" />
 
 </LinearLayout>

@@ -9,11 +9,11 @@
         android:layout_height="wrap_content"
         android:text="@string/hello" / -->
     
-    <!-- Button
+    <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan for Card" / -->
+        android:text="Scan for Card" />
 
     <!-- Button
         android:id="@+id/button2"
